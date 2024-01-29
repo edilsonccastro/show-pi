@@ -23,8 +23,11 @@ public class ProdutoService {
             throw new Exception(String.format("Produto %d não existe", produto.getId()));
     }
     
-    public void delete(Long id) {
-        repository.deleteById(id);
+    public void delete(Long id) throws Exception {
+        if (repository.findById(id).isPresent()) {
+            repository.deleteById(id);
+        } else 
+            throw new Exception(String.format("Produto %d não existe", id));
     }
 
 }

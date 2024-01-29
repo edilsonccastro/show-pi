@@ -1,3 +1,6 @@
+# Custom (ECdC)
+*.bak
+
 # Logs
 logs
 *.log
