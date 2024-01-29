@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     element: <App />
   },
   {
-    path: "/cart/:data",
+    path: "/cart",
     element: <Cart />
   },
   {

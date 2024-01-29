@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import './App.css'
 import { ProdutoData } from './interfaces/ProdutoData';
 import { NumericFormat } from 'react-number-format';
+import { useNavigate } from 'react-router-dom';
+import { ProdutoQtde } from './interfaces/ProdutoQtde';
 
 function App() {
 
   const [produtoLista, setProdutoLista] = useState<ProdutoData[]>([]);
-  const [carrinho, setCarrinho] = useState<number[]>([]);
+  const [carrinho, setCarrinho] = useState<ProdutoQtde[]>([]);
 
   useEffect(()=>{
     fetch("http://localhost:8080/produto")
@@ -15,8 +17,8 @@ function App() {
   }, []);
 
   const indiceNoCarrinho = (id: number) => {
-    return carrinho.findIndex((n: number) => {
-      return n === id;
+    return carrinho.findIndex((p: ProdutoQtde) => {
+      return p.id === id;
     });
   }
 
@@ -24,11 +26,16 @@ function App() {
     let listaTemp = [...carrinho];
     let indice = indiceNoCarrinho(id);
     if (indice < 0) {
-      listaTemp.push(id)
+      listaTemp.push({id: id, quantidade: 1})
     } else {
       listaTemp.splice(indice, 1);    
     }
     setCarrinho(listaTemp);
+  }
+
+  const nav = useNavigate();
+  const navToCarrinho = () => {
+    nav('/cart', {state: {carrinho: carrinho, produtoLista: produtoLista}})
   }
 
   return (
@@ -44,7 +51,7 @@ function App() {
               :
                 <span/>
             }
-            <a href="/cart" className="nav-link">
+            <a onClick={() => {navToCarrinho()}} className="nav-link">
                 <i className="bi-cart" style={{fontSize:'24px',lineHeight:'24px'}}></i>
             </a>
           </li>

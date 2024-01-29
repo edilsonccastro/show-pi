@@ -3,6 +3,14 @@ h1 {
   margin-bottom: 20px;
 }
 
+.container .navbar {
+  justify-content: flex-end;
+}
+
+.container .navbar ul {
+  padding-right: 12px;
+}
+
 .row .card-header img {
   width: auto;
   height: 150px;

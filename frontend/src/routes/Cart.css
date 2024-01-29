@@ -11,3 +11,16 @@ form input {
 form input[type="button"] {
   margin: 2px 4px;
 }
+
+.carrinho .navbar ul {
+  padding-left: 12px;
+}
+
+.carrinho img {
+  width: auto;
+  height: 60px;
+}
+
+.carrinho input {
+  width: 60px;
+}
