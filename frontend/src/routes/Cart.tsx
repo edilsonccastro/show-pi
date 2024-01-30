@@ -1,12 +1,17 @@
 import './Cart.css'
 
 import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { NumericFormat } from 'react-number-format';
 import { ProdutoData } from '../interfaces/ProdutoData';
 import { ProdutoQtde } from '../interfaces/ProdutoQtde';
 
 function Cart() {
+ 
+    const nav = useNavigate();
+    const navToApp = () => {
+      nav('/')
+    }
 
     const location = useLocation();
     let produtoLista = location.state.produtoLista;
@@ -39,6 +44,34 @@ function Cart() {
     //   setTotal(aux);
     // }
 
+    const comprar = () => {
+      fetch("http://localhost:8080/compra", {
+        method: 'post',
+        body: JSON.stringify(carrinho),
+        headers: {
+          'Content-type': 'application/json',
+        }
+      })
+      .then(response => {
+        if (response.ok) {
+          alert("Compra efetuada com sucesso"); 
+          navToApp();  
+        } else {
+          return response.text();
+        }
+      })
+      .then(text => {
+        if (text)
+          alert("Erro: " + text); 
+      })
+    }  
+
+    const eventoAoDigitar = (e: { target: any; }) => {
+      let listaTemp = [...carrinho];
+      listaTemp[parseInt(e.target.id)].quantidade = e.target.value;
+      setCarrinho(listaTemp);
+    }
+    
     const excluir = (id: number) => {
       if (confirm("Confirma a retirada do item?")) {
         let listaTemp = [...carrinho];
@@ -86,8 +119,10 @@ function Cart() {
                             />
                           </td>
                           <td>
-                            <NumericFormat displayType="input" valueIsNumericString
+                            <NumericFormat id={i.toString()}
+                              displayType="input" valueIsNumericString
                               value={carrinho[i].quantidade}
+                              onChange={eventoAoDigitar}
                               decimalScale={0} fixedDecimalScale
                             />
                           </td>
@@ -119,6 +154,9 @@ function Cart() {
             </tr> */}
           </tbody>
         </table>
+        <button className="btn btn-success" disabled={!produtosNoCarrinho.length} onClick={() => {comprar()}}>
+          Comprar
+        </button>
       </div>
   )
 }

@@ -4,6 +4,7 @@ import { ProdutoData } from './interfaces/ProdutoData';
 import { NumericFormat } from 'react-number-format';
 import { useNavigate } from 'react-router-dom';
 import { ProdutoQtde } from './interfaces/ProdutoQtde';
+import logo from './assets/show-pi.jpg';
 
 function App() {
 
@@ -40,6 +41,8 @@ function App() {
 
   return (
     <div className="container">
+      <div className="logo">
+      <img src={logo} /></div>
       <h1>ShowPI - Sua loja de produtos eletrônicos</h1>
       <nav className="navbar navbar-expand-lg navbar-dark bg-danger border-bottom shadow-sm mb-3">
         <ul className="navbar-nav">
