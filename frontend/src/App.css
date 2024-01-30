@@ -1,0 +1,27 @@
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  text-align: center;
+}
+
+.logo img {
+  width: 120px;
+  height: auto;
+}
+
+.container .navbar {
+  justify-content: flex-end;
+}
+
+.container .navbar ul {
+  padding-right: 12px;
+}
+
+.row .card-header img {
+  width: auto;
+  height: 150px;
+  margin-bottom: 10px;
+}

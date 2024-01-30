@@ -1,0 +1,26 @@
+form {
+  width: 90%;
+  margin: 30px auto;
+  text-align: center;
+}
+
+form input {
+  margin-bottom: 5px;
+}
+
+form input[type="button"] {
+  margin: 2px 4px;
+}
+
+.carrinho .navbar ul {
+  padding-left: 12px;
+}
+
+.carrinho img {
+  width: auto;
+  height: 60px;
+}
+
+.carrinho input {
+  width: 60px;
+}
